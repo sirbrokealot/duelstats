@@ -1,0 +1,1 @@
+#This shall display mtg battle statisticsurl
