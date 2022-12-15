@@ -120,9 +120,10 @@ if __name__ == "__main__":
         min_count_threshold=3
     )
     win_loss_percentages_array = game_statistics_array / total_games_played_array_filtered * 100
+    
     deck_play_counts = figure_and_define_deck_play_counts(total_games_played_array)
 
     plot_deck_combination_counts(deck_play_counts)
     plot_single_deck_counts(deck_play_counts)
-    plot_stats(win_loss_percentages_array, "win_loss_ratio")
+    plot_stats(np.around(win_loss_percentages_array, decimals=1), "win_loss_ratio")
     plot_stats(game_statistics_array, "game_stats")
