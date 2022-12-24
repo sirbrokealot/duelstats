@@ -5,7 +5,7 @@ import numpy as np
 
 np.seterr(divide="ignore", invalid="ignore")
 
-DECK_NAME_ORDER = ["Aristocrat", "Landfall", "Artifact", "Equip", "Sliver", "Spellslinger"]
+DECK_NAME_ORDER = ["Aristoc.", "Landfall", "Artifact", "Equip", "Sliver", "Spellsl."]
 CMAP = plt.get_cmap("viridis")
 
 
@@ -25,6 +25,25 @@ def plot_stats(array_to_plot: np.ndarray, plot_name: str) -> None:
 
     plt.xticks(np.arange(len(DECK_NAME_ORDER)), DECK_NAME_ORDER)
     plt.yticks(np.arange(len(DECK_NAME_ORDER)), DECK_NAME_ORDER)
+    plt.savefig(f"results/{plot_name}.png")
+
+
+def plot_stats_with_win_loss_summary(array_to_plot: np.ndarray, plot_name: str) -> None:
+
+    # win_loss_summary = np.around(np.nanmean(array_to_plot,axis=1))
+    win_loss_summary = np.reshape(np.around(np.nanmean(array_to_plot,axis=1), decimals=1), (-1, array_to_plot.shape[0]))
+
+    extended_array_to_plot = np.hstack([win_loss_summary.T,array_to_plot])
+
+    fig, ax = plt.subplots()
+    ax.imshow(extended_array_to_plot, cmap="RdYlGn")
+
+    for (i, j), z in np.ndenumerate(extended_array_to_plot):
+        ax.text(j, i, "{}".format(z), ha="center", va="center", size=12)
+
+    plt.yticks(np.arange(len(DECK_NAME_ORDER)), DECK_NAME_ORDER)
+
+    plt.xticks(np.arange(len(DECK_NAME_ORDER)+1), ['w/l']+DECK_NAME_ORDER)
     plt.savefig(f"results/{plot_name}.png")
 
 
@@ -115,15 +134,17 @@ def plot_single_deck_counts(deck_play_counts: Dict) -> None:
 
 if __name__ == "__main__":
     game_statistics_array = load_data()
+
     total_games_played_array, total_games_played_array_filtered  = figure_and_form_total_games_played_array(
         game_statistics_array,
         min_count_threshold=3
     )
     win_loss_percentages_array = game_statistics_array / total_games_played_array_filtered * 100
-    
     deck_play_counts = figure_and_define_deck_play_counts(total_games_played_array)
 
     plot_deck_combination_counts(deck_play_counts)
     plot_single_deck_counts(deck_play_counts)
-    plot_stats(np.around(win_loss_percentages_array, decimals=1), "win_loss_ratio")
+    plot_stats_with_win_loss_summary(np.around(win_loss_percentages_array, decimals=1), "win_loss_ratio_sum")
+    # plot_stats(np.around(win_loss_percentages_array, decimals=1), "win_loss_ratio")
+
     plot_stats(game_statistics_array, "game_stats")
