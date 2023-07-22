@@ -5,7 +5,7 @@ import numpy as np
 
 np.seterr(divide="ignore", invalid="ignore")
 
-DECK_NAME_ORDER = ["Aristoc.", "Landfall", "Artifact", "Equip", "Sliver", "Spellsl."]
+DECK_NAME_ORDER = ["Graveyard", "Landfall", "Artifact", "Equip", "Sliver", "Spellsl."]
 CMAP = plt.get_cmap("viridis")
 
 
