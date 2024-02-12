@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "win-loss-calc"
+name = "duelstats"
 version = "0.1.0"
 description = ""
 authors = ["Baron"]
@@ -12,6 +12,8 @@ numpy = "^1.23.5"
 requests = "^2.28.1"
 matplotlib = "^3.6.2"
 
+[tool.poetry.scripts]
+duelstats = "duelstats.main:main"
 
 [tool.poetry.group.lint.dependencies]
 isort = "^5.10.1"
