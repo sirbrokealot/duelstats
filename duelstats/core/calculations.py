@@ -65,11 +65,11 @@ class DSCalc(DuelStats):
         for idx in range(win_loss_percentages.shape[0]):
             row = win_loss_percentages[idx, :]
             # Check if the row is not entirely NaN to avoid RuntimeWarning.
+
             if not np.all(np.isnan(row)):
                 win_loss_means[idx] = np.nanmean(row)
-        else:
-            win_loss_means[idx] = np.nan
-
+            else:
+                win_loss_means[idx] = np.nan
         self.ds.win_loss_data = np.hstack([win_loss_means, win_loss_percentages])
 
 

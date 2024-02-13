@@ -9,7 +9,7 @@ def main():
     parser.add_argument("--csv_file", "-c", type=str, help="Path to the CSV file with duel data. Filename is equal to the output dir and file prefix", required=True)
     parser.add_argument("--min_matchup_threshold", type=int, default=3, help="At least X specific deck vs deck duels need to exist before specific matchup is calculated")
     parser.add_argument("--min_evaluation_threshold", type=int, default=3, help="At least X specific matchups have been calculated before global win/loss is calculated.")
-    parser.add_argument("--cmap", default='viridis', help='The colormap for the plots',)
+    parser.add_argument("--cmap", default='RdYlGn', help='The colormap for the plots',)
 
 
     args = parser.parse_args()
