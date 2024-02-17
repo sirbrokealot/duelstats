@@ -2,14 +2,20 @@ import argparse
 from .core.calculations import DSCalc
 from .core.plots import DSPlot
 from .core.duelstats import DuelStats
+from matplotlib.colors import LinearSegmentedColormap
 import os
 
 def main():
+    start_color = '#9A68D0'  # A light purple
+    middle_color = '#F5F5DC'  # Beige
+    end_color = '#2CA6A4'    # A lightpetrol
+    cmap_custom = LinearSegmentedColormap.from_list("CustomCmap", [start_color, middle_color, end_color])
+
     parser = argparse.ArgumentParser(description="Analyze and plot metrics for deck vs deck games from a CSV file.")
     parser.add_argument("--csv_file", "-c", type=str, help="Path to the CSV file with duel data. Filename is equal to the output dir and file prefix", required=True)
     parser.add_argument("--min_matchup_threshold", type=int, default=3, help="At least X specific deck vs deck duels need to exist before specific matchup is calculated")
     parser.add_argument("--min_evaluation_threshold", type=int, default=3, help="At least X specific matchups have been calculated before global win/loss is calculated.")
-    parser.add_argument("--cmap", default='RdYlGn', help='The colormap for the plots',)
+    parser.add_argument("--cmap", default=cmap_custom, help='The colormap for the plots',)
 
 
     args = parser.parse_args()
@@ -31,6 +37,7 @@ def main():
     plot.deck_to_deck_duel_count()
     plot.single_deck_duel_count()
     plot.win_loss_vs_cost()
+    plot.mana_diversity()
 
 if __name__ == "__main__":
     main()

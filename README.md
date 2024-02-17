@@ -77,4 +77,10 @@ DuelStats generates several plots in the results/output_name/ directory,
 providing visual insights into the duel statistics, including win-loss
 summaries, duel counts, and the relationship between win rates and deck costs.
 
+## Current example decks
+
+Decks are listed https://www.moxfield.com/decks/personal?folder=wOyK2
+Priced are taken from an export to tappedout.net then the cheapest tgc player price. Would be nice to have some automatism but the api's for deckmanager sites are non public to my knowledge.
+I tried moxfield.com, tappedout.net and deckstats.net
+
 
