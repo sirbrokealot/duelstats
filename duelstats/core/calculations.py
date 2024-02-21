@@ -5,9 +5,10 @@ from duelstats.core.duelstats import DuelStats
 
 
 class DSCalc(DuelStats):
-    def __init__(self, duel_stats_instance, min_matchup_threshold: int):
+    def __init__(self, duel_stats_instance, min_matchup_threshold: int, min_evaluation_threshold: int):
         self.ds = duel_stats_instance
         self.min_matchup_threshold = min_matchup_threshold
+        self.min_evaluation_threshold = min_evaluation_threshold
 
     def run(self):
         self.total_played_duels()
@@ -66,7 +67,9 @@ class DSCalc(DuelStats):
             row = win_loss_percentages[idx, :]
             # Check if the row is not entirely NaN to avoid RuntimeWarning.
 
-            if not np.all(np.isnan(row)):
+            # At least min_evaluation_threshold specific matchups have been calculated 
+            # before global win/loss is calculated.
+            if np.sum(~np.isnan(row)) >= self.min_evaluation_threshold:
                 win_loss_means[idx] = np.nanmean(row)
             else:
                 win_loss_means[idx] = np.nan

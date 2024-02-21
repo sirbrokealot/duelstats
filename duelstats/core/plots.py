@@ -47,7 +47,7 @@ class DSPlot(DuelStats):
         plt.tight_layout()
         plt.savefig(f"results/{self.output_name}/raw_data_visualization.png", dpi=300)
 
-    def stats_with_win_loss_summary(self, min_evaluation_threshold: int) -> None:
+    def stats_with_win_loss_summary(self) -> None:
 
         # Normalize color scale based on actual data range
         valid_data = self.ds.win_loss_data[self.ds.win_loss_data != -1]

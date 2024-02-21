@@ -27,12 +27,12 @@ def main():
 
     duel_stats_instance = DuelStats.load_duel_data(args.csv_file)
 
-    duel_stats_calculations = DSCalc(duel_stats_instance, args.min_matchup_threshold)
+    duel_stats_calculations = DSCalc(duel_stats_instance, args.min_matchup_threshold, args.min_evaluation_threshold)
     duel_stats_calculations.run()
 
 
     plot = DSPlot(duel_stats_instance, cmap=args.cmap, output_name=output_name)
-    plot.stats_with_win_loss_summary(min_evaluation_threshold=args.min_evaluation_threshold)
+    plot.stats_with_win_loss_summary()
     plot.raw_stats()
     plot.deck_to_deck_duel_count()
     plot.single_deck_duel_count()
