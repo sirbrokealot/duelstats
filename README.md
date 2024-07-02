@@ -28,6 +28,9 @@ DuelStats, follow these steps:
 ```bash
 git clone https://github.com/sirbrokealot/duelstats.git
 cd duelstats
+curl -sSL https://install.python-poetry.org | python3 -
+# put poetry to path variable 
+i
 poetry install
 ```
 
